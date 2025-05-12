@@ -1,24 +1,25 @@
 ---
 import "../styles/global.css";
+import sobresImage from '../assets/img/sobres.jpg';
 ---
-<section
-	class="relative w-full"
->
-	<!-- Imagen de fondo como elemento img para ajustar height al natural -->
-	<img
-		src="../../img/sobres.jpg"
-		alt="Sobre Sorpresa"
-		class="w-full h-auto block"
-	/>
 
-	<!-- Overlay semitransparente en la mitad superior -->
-	<div class="absolute inset-x-0 top-0 h-1/2 bg-white/60"></div>
+<section class="relative w-full">
+  <!-- Ahora sí importa la URL corregida -->
+  <img
+    src={sobresImage.src}
+    alt="Sobre Sorpresa"
+    class="w-full h-auto block"
+  />
 
-	<!-- Contenido posicionado hacia arriba con mayor tamaño de texto -->
-	<div class="absolute inset-x-0 top-1/4 flex flex-col items-center px-4 text-center">
-		<h2 class="text-3xl font-semibold text-gray-800 mb-2">Sobre Sorpresa</h2>
-		<p class="italic text-lg text-gray-600">
-			Tendremos en recepción una caja para que puedas depositar tu sobre de regalo
-		</p>
-	</div>
+  <!-- Overlay semitransparente -->
+  <div class="absolute inset-x-0 top-0 h-1/2 bg-white/60"></div>
+
+  <!-- Contenido centrado -->
+  <div class="absolute inset-x-0 top-1/4 flex flex-col items-center px-4 text-center">
+    <h2 class="text-3xl font-semibold text-gray-800 mb-2">Sobre Sorpresa</h2>
+    <p class="italic text-lg text-gray-600">
+      Tendremos en recepción una caja para que puedas depositar tu sobre de regalo
+    </p>
+  </div>
 </section>
+

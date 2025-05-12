@@ -1,9 +1,21 @@
 ---
 import "../styles/global.css";
-// src/components/Tarjetas.astro
 
+// --- Importar las imágenes desde src/assets/img/ ---
+// Asegúrate de que estas rutas relativas sean correctas desde Itinerario.astro
+// hasta la ubicación de las imágenes en src/assets/img/.
+// En tu caso, son '../assets/img/'
+
+import iglesiaImage from '../assets/img/iglesia.png';
+import jardinAntiguaImage from '../assets/img/Jardin_antigua.jpg';
+import itinerarioIcon from '../assets/img/Itinerario.png'; // Para el icono de itinerario
+// Revisa tu captura de pantalla: tienes 'fondo-espejo.png' en assets/img/
+// Si tu fondo es JPG, asegúrate de que el archivo exista con esa extensión.
+import fondoEspejoImage from '../assets/img/fondo-espejo.jpg'; // O .jpg si es el caso
+
+// src/components/Tarjetas.astro (Este comentario es incorrecto, estás en Itinerario.astro)
 interface Tarjeta {
-  foto: string;
+  foto: string; // Esta propiedad contendrá la URL generada por Astro
   titulo: string;
   lugar: string;
   horario: string;
@@ -15,8 +27,9 @@ interface Tarjeta {
 
 const tarjetas: Tarjeta[] = [
   {
-    foto: '../../img/iglesia.png',
-    titulo: 'Ceremonio Religiosa',
+    // Usa la URL del asset importado
+    foto: iglesiaImage.src,
+    titulo: 'Ceremonia Religiosa',
     lugar: 'Santuario de Fatima',
     horario: '6:00 pm',
     direccion: 'Av. Cuauhtemoc 400, Fátima.',
@@ -25,7 +38,8 @@ const tarjetas: Tarjeta[] = [
     mapaUrl: 'https://maps.app.goo.gl/F9sSn4WETkcFSpRd7?g_st=iw',
   },
   {
-    foto: '../../img/Jardin_antigua.jpg',
+    // Usa la URL del asset importado
+    foto: jardinAntiguaImage.src,
     titulo: 'Fiesta de Cumpleaños',
     lugar: 'Salón Jardín La Antigua',
     horario: '8:30 pm',
@@ -37,13 +51,14 @@ const tarjetas: Tarjeta[] = [
 ];
 
 ---
-<section class="relative bg-cover bg-center bg-no-repeat" style="background-image: url('../../img/fondo-espejo.jpg')">
+<section class="relative bg-cover bg-center bg-no-repeat" style={`background-image: url('${fondoEspejoImage.src}')`}>
     <div class="flex justify-center items-center min-h-[300px] px-4 py-8">
         <div class="bg-white/60 p-6 rounded-lg shadow-md">
-            <img src="../../img/Itinerario.png" alt="Itinerario del evento" class="mx-auto max-w-xs" />
+            <img src={itinerarioIcon.src} alt="Itinerario del evento" class="mx-auto max-w-xs" />
         </div>
     </div>
 </section>
+
 <section class="grid grid-cols-1 sm:grid-cols-2 gap-6 px-4 py-8">
   {tarjetas.map((item) => (
     <div class="bg-white rounded-lg shadow-md overflow-hidden">

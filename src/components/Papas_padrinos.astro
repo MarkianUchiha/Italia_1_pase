@@ -1,22 +1,42 @@
 ---
-import "../styles/global.css"; 
+import "../styles/global.css";
+import previewImage from '../assets/img/preview.jpg';
 ---
-<section class="flex flex-col items-center justify-center text-center p-4 font-body space-y-4 md:space-y-6 bg-[url('../../img/preview.jpg')] bg-cover bg-center bg-no-repeat py-6 sm:py-8 md:py-10">
-    <div class="mx-auto max-w-md overflow-hidden rounded-xl bg-white/60">
-        <div class="pt-4">
-            <h2 class="text-lg text-black font-medium text-balance p-4 md:text-xl">"Quiero agradecer a Dios y a la vida por permitirnos celebrar los 15 años de nuestra amada Italia."</h2>
-        </div>
-        <div class="py-2">
-                <h1 class="text-xl text-black p-4 font-bold mt-4 md:text-3xl">Mis Padres</h1>
-                <p class="text-4xl text-black font-title md:text-lg">Astrid Veronica González Arjon</p> 
-                <p class="text-base text-black font-title md:text-lg">&</p> 
-                <p class="text-4xl text-black font-title md:text-lg">Gerardo Estupiñan Galindo</p>
-            <div class=" py-4 pb-2">
-                <h2 class="text-xl text-black p-4 font-semibold mt-6 md:text-2xl">Mis Padrinos</h2>
-                <p class="text-3xl text-black font-title md:text-lg">Jonathan H. González Lugo</p>
-                <p class="text-base text-black font-title md:text-lg">&</p> 
-                <p class="text-3xl text-black font-title md:text-lg">Paulina Adriana Guerra Alcazar</p>
-            </div>
-        </div>
+
+<section
+  class="flex flex-col items-center justify-center text-center p-4 font-body space-y-4 md:space-y-6 py-6 sm:py-8 md:py-10 bg-black"
+  style={`
+    background-image: url(${previewImage.src});
+    background-size: cover;
+    background-position: center;
+  `}
+>
+  <div class="mx-auto max-w-md overflow-hidden rounded-xl bg-white/60">
+    <div class="pt-4">
+      <h2 class="text-lg md:text-xl font-medium p-4 text-black">
+        “Damos gracias a Dios por la vida de nuestra amada Italia, queremos compartir contigo esta felicidad.”
+      </h2>
     </div>
+    <div class="py-2">
+      <h1 class="text-xl md:text-3xl font-bold p-4 text-black">Mis Padres</h1>
+      <p class="text-4xl md:text-lg font-title text-black">
+        Astrid Veronica González Arjon
+      </p>
+      <p class="text-base md:text-lg font-title text-black">&</p>
+      <p class="text-4xl md:text-lg font-title text-black">
+        Gerardo Estupiñan Galindo
+      </p>
+
+      <div class="py-4 pb-2">
+        <h2 class="text-xl md:text-2xl font-semibold p-4 text-black">Mis Padrinos</h2>
+        <p class="text-3xl md:text-lg font-title text-black">
+          Jonathan H. González Lugo
+        </p>
+        <p class="text-base md:text-lg font-title text-black">&</p>
+        <p class="text-3xl md:text-lg font-title text-black">
+          Paulina Adriana Guerra Alcazar
+        </p>
+      </div>
+    </div>
+  </div>
 </section>
