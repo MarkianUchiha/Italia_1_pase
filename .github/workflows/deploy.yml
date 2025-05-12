@@ -32,6 +32,13 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+  - name: Checkout your repository using git
+    uses: actions/checkout@v4
+  - name: Setup Node.js
+    uses: actions/setup-node@v3
+    with:
+      node-version: 22.15.0 # O la versión de Node.js que prefieras
+  - name: Install dependencies
+    run: pnpm install
+  - name: Build your project
+    run: pnpm build
