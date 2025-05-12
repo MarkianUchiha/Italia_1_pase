@@ -7,5 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://MarkianUchiha.github.io',
   base: 'Invitacion_Italia',
-  integrations: [tailwindcss()],
+  vite: {
+    plugins: [tailwindcss()]
+  }
 });
