@@ -2,4 +2,5 @@ ignoredBuiltDependencies:
   - esbuild
   - sharp
 packages:
-  - '.'
+  - packages/*
+  - other-folder/*
