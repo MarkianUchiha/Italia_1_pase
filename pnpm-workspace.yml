@@ -1,3 +1,0 @@
-git add pnpm-workspace.yaml
-git commit -m "Fix: Configuración del pnpm-workspace para proyectos sin paquetes"
-git push
