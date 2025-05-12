@@ -1,0 +1,76 @@
+---
+import "../styles/global.css";
+
+// Puedes adaptar este archivo como un componente o parte de una página
+const images = [
+  "../../img/Foto-4.jpg",
+  "../../img/Foto-8.jpg",
+  "../../img/Foto-16.jpg",
+  "../../img/Foto-19.jpg",
+  "../../img/Foto-30.jpg",
+  "../../img/Foto-40.jpg",
+  "../../img/Foto-48.jpg",
+  "../../img/Foto-16.jpg",
+];
+---
+<div class="relative w-full max-w-md mx-auto overflow-hidden rounded-xl shadow-lg">
+  <div id="track" class="flex space-x-2 transition-transform duration-700 ease-in-out">
+    {images.map((src) => (
+      <div class="flex-shrink-0 w-[85%] aspect-[3/4] overflow-hidden rounded-lg">
+        <img
+          src={src}
+          alt="Imagen galería"
+          class="w-full h-full object-cover"
+        />
+      </div>
+    ))}
+  </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const images = [
+        "../../img/Foto-4.jpg",
+        "../../img/Foto-8.jpg",
+        "../../img/Foto-16.jpg",
+        "../../img/Foto-19.jpg",
+        "../../img/Foto-30.jpg",
+        "../../img/Foto-40.jpg",
+        "../../img/Foto-48.jpg",
+        "../../img/Foto-16.jpg",
+    ];
+    let index = 0;
+
+    const imageEl = document.getElementById("gallery-image");
+
+    setInterval(() => {
+    index = (index + 1) % images.length;
+    imageEl.src = images[index];
+  }, 3000); // Cambia cada 3 segundos
+    });
+
+    
+// aqui empiezan los efectos de la galeria
+  const track = document.getElementById("track");
+    const slides = Array.from(track.children);
+    let index = 0;
+
+  // Calcula el ancho de cada slide (90% del contenedor)
+  let slideWidth = slides[0].offsetWidth;
+
+  function showSlide(i) {
+    track.style.transform = `translateX(-${i * slideWidth}px)`;
+  }
+
+  // Autoplay cada 3s
+  setInterval(() => {
+    index = (index + 1) % slides.length;
+    showSlide(index);
+  }, 3000);
+
+  // Recalcula al redimensionar ventana
+  window.addEventListener("resize", () => {
+    slideWidth = slides[0].offsetWidth;
+    showSlide(index);
+  });
+
+</script>

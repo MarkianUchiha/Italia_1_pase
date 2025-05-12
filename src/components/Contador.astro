@@ -1,0 +1,66 @@
+---
+import "../styles/global.css";
+---
+<section
+	class="relative w-full h-[200px] max-h-[200px] bg-cover bg-center bg-no-repeat bg-[url('../../img/fondo-contador.png')] flex items-center justify-center"
+>
+	<!-- Contenedor del contador centrado vertical y horizontalmente -->
+	<div class="z-10 mx-auto max-w-md p-6 bg-white/70 backdrop-blur-sm rounded-xl shadow-lg text-center">
+		<p class="text-2xl md:text-4xl font-semibold mb-4">Faltan para la fiesta</p>
+		<div class="flex justify-around">
+			<div>
+				<p id="days" class="text-2xl md:text-4xl font-bold">09</p>
+				<span class="block text-base md:text-xl">días</span>
+			</div>
+			<div>
+				<p id="hours" class="text-2xl md:text-4xl font-bold">23</p>
+				<span class="block text-base md:text-xl">horas</span>
+			</div>
+			<div>
+				<p id="min" class="text-2xl md:text-4xl font-bold">50</p>
+				<span class="block text-base md:text-xl">minutos</span>
+			</div>
+			<div>
+				<p id="sec" class="text-2xl md:text-4xl font-bold">50</p>
+				<span class="block text-base md:text-xl">seg</span>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+// Obtenemos los elementos HTML donde se mostrará el tiempo restante
+    const days = document.getElementById("days"),
+        hours = document.getElementById("hours"),
+        min = document.getElementById("min"),
+        sec = document.getElementById("sec"); 
+
+// actualizamos la fecha cada segundo
+setInterval(() => {
+
+    // Obtener la fecha de la fiesta
+const cumple= new Date("jun 27, 2025 00:00:00").getTime();
+let hoy = new Date().getTime();
+
+// Calcular la diferencia entre la fecha de "cumple" y la fecha actual
+let tiempo = cumple - hoy;
+let dias = Math.floor(tiempo / (1000 * 60 * 60 * 24)),
+    horas = Math.floor((tiempo % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+    minutos = Math.floor((tiempo % (1000 * 60 * 60)) / (1000 * 60)),
+    segundos = Math.floor((tiempo % (1000 * 60)) / 1000);
+
+// cambiamos el contenido de los elementos HTML y asignamos dos digitos
+days.innerHTML = dias < 10 ? "0" + dias : dias;
+hours.innerHTML = horas < 10 ? "0" + horas : horas;
+min.innerHTML = minutos < 10 ? "0" + minutos : minutos;
+sec.innerHTML = segundos < 10 ? "0" + segundos : segundos;
+
+}, 1000);
+
+});
+
+</script>
+
