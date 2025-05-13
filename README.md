@@ -51,4 +51,7 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
->>>>>>> 0ab6e61 (Initial commit from Astro)
+
+## Notas del desarrollador
+
+El despliegue en github pages ha sido todo un problema.
