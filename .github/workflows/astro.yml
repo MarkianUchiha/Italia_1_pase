@@ -38,7 +38,16 @@ jobs:
       - name: Detect package manager
         id: detect-package-manager
         run: |
-          if [ -f "${{ github.workspace }}/yarn.lock" ]; then
+          echo "Archivos en el workspace:"
+          ls -al ${{ github.workspace }}
+
+          if [ -f "${{ github.workspace }}/pnpm-lock.yaml" ]; then
+            echo "manager=pnpm" >> $GITHUB_OUTPUT
+            echo "command=install" >> $GITHUB_OUTPUT
+            echo "runner=pnpm" >> $GITHUB_OUTPUT
+            echo "lockfile=pnpm-lock.yaml" >> $GITHUB_OUTPUT
+            exit 0
+          elif [ -f "${{ github.workspace }}/yarn.lock" ]; then
             echo "manager=yarn" >> $GITHUB_OUTPUT
             echo "command=install" >> $GITHUB_OUTPUT
             echo "runner=yarn" >> $GITHUB_OUTPUT
@@ -51,7 +60,7 @@ jobs:
             echo "lockfile=package-lock.json" >> $GITHUB_OUTPUT
             exit 0
           else
-            echo "Unable to determine package manager"
+            echo "Error: No se pudo determinar el gestor de paquetes."
             exit 1
           fi
       - name: Depurar estructura de archivos
@@ -60,17 +69,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22.15.0"
-          cache: ${{ steps.detect-package-manager.outputs.manager }}
-          cache-dependency-path: ${{ env.BUILD_PATH }}/${{ steps.detect-package-manager.outputs.lockfile }}
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
       - name: Install dependencies
-        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+        run: ${{ steps.detect-package-manager.outputs.runner }} ${{ steps.detect-package-manager.outputs.command }}
         working-directory: ${{ env.BUILD_PATH }}
       - name: Build with Astro
         run: |
-          ${{ steps.detect-package-manager.outputs.runner }} astro build \
+          pnpm astro build \
             --site "${{ steps.pages.outputs.origin }}" \
             --base "${{ steps.pages.outputs.base_path }}"
         working-directory: ${{ env.BUILD_PATH }}
