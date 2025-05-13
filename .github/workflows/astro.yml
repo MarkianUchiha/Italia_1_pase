@@ -35,37 +35,34 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Node.js
+
+      - name: Setup Node.js and pnpm
         uses: actions/setup-node@v4
         with:
           node-version: "22.15.0"
-          cache: pnpm
-      - name: Instalar pnpm
-        run: |
-          npm install -g pnpm
-          echo "Agregando pnpm al PATH"
-          export PATH="$(npm bin -g):$PATH"
-          pnpm --version # Verificar instalación
-      - name: Verify pnpm installation
-        run: pnpm --version
+          cache: "pnpm"
+          package-manager: "pnpm"
+
       - name: Install dependencies
         run: pnpm install
         working-directory: ${{ env.BUILD_PATH }}
+
       - name: Build with Astro
         run: pnpm astro build
         working-directory: ${{ env.BUILD_PATH }}
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ${{ env.BUILD_PATH }}/dist
 
   deploy-pages:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
-    runs-on: ubuntu-latest
-    name: Deploy
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
