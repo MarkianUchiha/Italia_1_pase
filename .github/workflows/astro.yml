@@ -40,20 +40,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22.15.0"
-          cache: "pnpm"
-
-      - name: Install pnpm
-        run: npm install -g pnpm
-
-      - name: Verify pnpm installation
-        run: pnpm --version
+          cache: 'npm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
         working-directory: ${{ env.BUILD_PATH }}
 
       - name: Build with Astro
-        run: pnpm astro build
+        run: npm run build
         working-directory: ${{ env.BUILD_PATH }}
 
       - name: Upload artifact
