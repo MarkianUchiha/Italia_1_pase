@@ -18,5 +18,6 @@ export default defineConfig({
 			// @ts-ignore: usar plugin Tailwind para Vite
 			tailwindcss(),
 		],
+		assetsInclude: ['**/*.mp3'], // Añadimos soporte para archivos MP3
 	},
 });

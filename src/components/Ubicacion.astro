@@ -1,14 +1,15 @@
 ---
 import "../styles/global.css";
 import songUrl from '../assets/musica.mp3';
+
 ---
-<section class="flex items-center justify-center min-h-screen">
+<section class="flex items-center justify-center min-h-[200px] py-6">
   <div class="flex flex-col items-center">
-    <audio controls autoplay loop>
-      <source src={songUrl} type="audio/mpeg" />
+    <audio controls autoplay loop class="mb-2 w-64">
+      <source src={songUrl} type="audio/mp3" />
       Tu navegador no soporta audio.
     </audio>
-    <p class="text-sm mt-2 py-5">
+    <p class="text-sm mt-2">
       By <a class="text-indigo-600" href="https://markidev.netlify.app/">MarkiDev</a>
     </p>
   </div>
