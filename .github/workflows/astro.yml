@@ -40,8 +40,12 @@ jobs:
         with:
           node-version: "22.15.0"
           cache: pnpm
-      - name: Install pnpm
-        run: npm install -g pnpm
+      - name: Instalar pnpm
+        run: |
+          npm install -g pnpm
+          echo "Agregando pnpm al PATH"
+          export PATH="$(npm bin -g):$PATH"
+          pnpm --version # Verificar instalación
       - name: Verify pnpm installation
         run: pnpm --version
       - name: Install dependencies
