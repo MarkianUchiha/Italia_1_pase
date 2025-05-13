@@ -7,7 +7,7 @@ const base = `/${repoName}`;
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://MarkianUchiha.github.io', // Reemplaza 'MarkianUchiha' con tu nombre de usuario de GitHub
+  site: 'https://MarkianUchiha.github.io/Invitacion_Italia', // Reemplaza 'MarkianUchiha' con tu nombre de usuario de GitHub
   base: base,
   build: {
     assetsPrefix: base, // ¡CRUCIAL para las rutas de GitHub Pages!
