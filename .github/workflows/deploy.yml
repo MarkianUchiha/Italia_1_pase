@@ -15,24 +15,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Clona tu repo
-      - uses: actions/checkout@v4
-
-      # 2. Instala Node y pnpm
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      # 3. Instala dependencias y build
-      - run: pnpm install
-      - run: pnpm build
-
-      # 4. Prepara el artifact de Pages
-      - name: Upload pages artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: ./dist
-
-      # 5. Despliega a GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 22.15.0
+    - run: pnpm install
+    - run: pnpm build
+    - name: Upload pages artifact
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: ./dist
+    - name: Deploy to GitHub Pages
+      uses: actions/deploy-pages@v1
