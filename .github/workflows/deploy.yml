@@ -22,7 +22,7 @@ jobs:
     - run: pnpm install
     - run: pnpm build
     - name: Verificar directorio de compilación
-      run: ls -la ./dist
+      run: if [ ! -d "./dist" ]; then echo "Directorio de compilación no encontrado"; exit 1; fi
     - name: Upload pages artifact
       uses: actions/upload-artifact@v3
       with:
