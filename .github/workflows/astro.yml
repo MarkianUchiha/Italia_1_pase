@@ -54,10 +54,12 @@ jobs:
             echo "Unable to determine package manager"
             exit 1
           fi
+      - name: Depurar estructura de archivos
+        run: ls -al ${{ github.workspace }}
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22.15.0"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
           cache-dependency-path: ${{ env.BUILD_PATH }}/${{ steps.detect-package-manager.outputs.lockfile }}
       - name: Setup Pages
