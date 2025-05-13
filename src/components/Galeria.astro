@@ -1,61 +1,92 @@
 ---
 // src/components/Galeria.astro
 
-import '../styles/global.css';
-import Foto4 from '../assets/img/Foto-4.jpg';
-import Foto8 from '../assets/img/Foto-8.jpg';
-import Foto16 from '../assets/img/Foto-16.jpg';
-import Foto19 from '../assets/img/Foto-19.jpg';
-import Foto30 from '../assets/img/Foto-30.jpg';
-import Foto40 from '../assets/img/Foto-40.jpg';
-import Foto48 from '../assets/img/Foto-48.jpg';
+import Foto1 from '../assets/img/Foto-4.jpg';
+import Foto2 from '../assets/img/Foto-8.jpg';
+import Foto3 from '../assets/img/Foto-16.jpg';
+import Foto4 from '../assets/img/Foto-19.jpg';
+import Foto5 from '../assets/img/Foto-30.jpg';
+import Foto6 from '../assets/img/Foto-40.jpg';
+import Foto7 from '../assets/img/Foto-48.jpg';
+// importa tus 4 imágenes u8
 
-const galleryImages = [
+const galleryImages: string[] = [
+	Foto1.src,
+	Foto2.src,
+	Foto3.src,
 	Foto4.src,
-	Foto8.src,
-	Foto16.src,
-	Foto19.src,
-	Foto30.src,
-	Foto40.src,
-	Foto48.src,
-	Foto16.src,
+	Foto5.src,
+	Foto6.src,
+	Foto7.src,
 ];
 
-const galleryConfig = {
-	images: galleryImages,
-	slideGap: 16,
-	interval: 3000,
-};
+const slideGap = 16;    // px, coincide con gap-4
+const interval = 3000;   // ms
+let timer: number;
+let current = 0;
+
+function step(track: HTMLElement, slides: HTMLElement[]) {
+	const w = slides[0].offsetWidth;
+	track.style.transform = `translateX(-${current * (w + slideGap)}px)`;
+}
 ---
 
-<section class="relative w-full overflow-hidden py-8 px-4">
-	<div
-		id="gallery-track"
-		class="flex gap-4 transition-transform duration-700 ease-in-out"
-	>
-		{galleryConfig.images.map(src => (
-			<div class="flex-shrink-0 w-[85%] max-w-xs aspect-[3/4] rounded-lg overflow-hidden mx-auto">
-				<img src={src} alt="Imagen galería" class="w-full h-full object-cover" />
+<section class="relative w-full overflow-hidden px-4">
+	<div id="gallery-track" class="flex gap-4 transition-transform duration-700 ease-in-out">
+		{galleryImages.map(src => (
+			<div class="flex-shrink-0 w-[85%] max-w-xs aspect-[3/4] rounded-lg overflow-hidden">
+				<img src={src} alt="Galería" class="w-full h-full object-cover" />
 			</div>
 		))}
 	</div>
 
-	<script type="module" client:load>
-		import runGallery from '../scripts/galeria.ts';
+	<script client:load>
+		(() => {
+			const track = document.getElementById('gallery-track');
+			if (!track) {
+				console.warn('Gallery track not found');
+				return;
+			}
 
-		runGallery({
-			images: [
-				Foto4.src,
-				Foto8.src,
-				Foto16.src,
-				Foto19.src,
-				Foto30.src,
-				Foto40.src,
-				Foto48.src,
-				Foto16.src,
-			],
-			slideGap: 16,
-			interval: 3000,
-		});
+			const slides = Array.from(track.children);
+			const slideGap = 16;
+			const interval = 3000;
+			let current = 0;
+			let timer;
+
+			function step() {
+				const w = slides[0].offsetWidth;
+				track.style.transform = `translateX(-${current * (w + slideGap)}px)`;
+			}
+
+			function start() {
+				timer = setInterval(() => {
+					current = (current + 1) % slides.length;
+					step();
+				}, interval);
+			}
+
+			// Swipe
+			let startX = 0;
+			track.addEventListener('touchstart', e => {
+				clearInterval(timer);
+				startX = e.touches[0].clientX;
+			});
+			track.addEventListener('touchend', e => {
+				const diff = startX - e.changedTouches[0].clientX;
+				if (Math.abs(diff) > 50) {
+					current = diff > 0 ? (current + 1) % slides.length : (current - 1 + slides.length) % slides.length;
+					step();
+				}
+				start();
+			});
+
+			// Resize
+			window.addEventListener('resize', step);
+
+			// Initialize
+			step();
+			start();
+		})();
 	</script>
 </section>
