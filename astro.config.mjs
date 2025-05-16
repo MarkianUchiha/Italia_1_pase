@@ -3,7 +3,7 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
-const repoName = 'Invitacion_Italia';
+const repoName = 'Italia_1_pase';
 const base = `/${repoName}`;
 
 export default defineConfig({
